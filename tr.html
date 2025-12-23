@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaira | Turkey Gallery</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="tr-style.css"> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+    <span class="container"></span>
+
+    <div id="stars"></div><div id="stars2"></div><div id="stars3"></div>
+
+    <div class="header-container">
+        <div class="header-content">
+            <a href="index.html" class="back-btn">← BACK TO HOME</a>
+            <h1 class="country-title">Turkey</h1>
+            <div class="counter-wrapper">
+                <span id="count-up">0</span>
+                <span>MEMORIES</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="masonry-wrapper" id="gallery-container"></div>
+
+    <div id="lightbox" class="lightbox">
+        <span class="close-btn">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" alt="Zoomed view" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+    </div>
+
+    <script src="tr-script.js"></script>
+</body>
+</html>

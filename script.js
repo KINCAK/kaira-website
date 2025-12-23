@@ -136,3 +136,60 @@ function initEnjoyAnimation() {
         }
     );
 }
+/* ... existing code (checkPassword, initBlurBio, etc.) ... */
+
+// --- GALLERY AND LIGHTBOX INITIALIZATION ---
+const targetValue = 149;
+const container = document.getElementById('gallery-container'); // This defines 'container'
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeBtn = document.querySelector('.close-btn');
+
+// 1. Generate Photos
+for (let i = 1; i <= targetValue; i++) {
+    const div = document.createElement('div');
+    div.className = 'photo-item';
+    const img = document.createElement('img');
+    img.src = `Imgtr/${i}.jpg`;
+    img.loading = "lazy";
+    img.onerror = function() { this.parentElement.remove(); };
+    div.appendChild(img);
+    container.appendChild(div);
+}
+
+// 2. PASTE LIGHTBOX LOGIC HERE
+container.addEventListener('click', (e) => {
+    const clickedImg = e.target.closest('img');
+    if (clickedImg) {
+        lightbox.style.display = 'flex';
+        setTimeout(() => lightbox.classList.add('active'), 10);
+        lightboxImg.src = clickedImg.src;
+    }
+});
+
+const closeLightbox = () => {
+    lightbox.classList.remove('active');
+    setTimeout(() => {
+        lightbox.style.display = 'none';
+        lightboxImg.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"; 
+    }, 300);
+};
+
+if(closeBtn) closeBtn.onclick = closeLightbox;
+if(lightbox) lightbox.onclick = (e) => { if (e.target === lightbox) closeLightbox(); };
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape" && lightbox.style.display === 'flex') closeLightbox();
+});
+
+// 3. Counter Animation (GSAP)
+gsap.to("#count-up", {
+    innerText: targetValue,
+    duration: 2.5,
+    ease: "power2.out",
+    snap: { innerText: 1 },
+    onUpdate: function() {
+        const countUpEl = document.getElementById('count-up');
+        if(countUpEl) countUpEl.innerHTML = Math.ceil(this.targets()[0].innerText);
+    }
+});
