@@ -1,0 +1,217 @@
+/* RESET AND BASE */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #2b3036 0%, #3e3836 40%, #96541e 100%);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Prevent scrolling while locked */
+}
+
+/* PRIVACY OVERLAY STYLES */
+#privacy-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #151515; /* Dark background to hide site */
+    z-index: 9999; /* Ensures it sits on top */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease;
+}
+
+.login-box {
+    text-align: center;
+    background: #222;
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid #333;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.login-box h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.login-box p {
+    color: #aaa;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.login-box input {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background: #333;
+    color: white;
+    margin-right: 10px;
+    outline: none;
+}
+
+.login-box button {
+    padding: 12px 25px;
+    background: linear-gradient(to bottom, #ffeebb 0%, #eacda3 100%);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #4b3621;
+}
+
+.login-box button:hover {
+    opacity: 0.9;
+}
+
+/* MAIN CONTENT HIDDEN INITIALLY */
+.container {
+    display: flex;
+    width: 90%;
+    max-width: 1100px;
+    gap: 60px;
+    align-items: center;
+    opacity: 0; /* Hidden */
+    transition: opacity 1s ease;
+}
+
+/* LEFT COLUMN - CD CASE */
+.left-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cd-case {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    aspect-ratio: 1 / 1;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.3);
+    border-left: 12px solid rgba(255,255,255,0.4);
+    box-shadow: 15px 15px 40px rgba(0,0,0,0.6);
+    padding: 10px;
+}
+
+.cover-art {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.plastic-sheen {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 60%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.barcode {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: #fff;
+    padding: 4px 8px;
+    color: #000;
+    font-size: 10px;
+    font-family: monospace;
+    transform: rotate(-2deg);
+    opacity: 0.9;
+}
+
+.pre-order {
+    margin-top: 25px;
+    text-align: right;
+    width: 100%;
+    max-width: 450px;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+    color: #ddd;
+    text-transform: uppercase;
+}
+
+/* RIGHT COLUMN */
+.right-column {
+    flex: 1;
+    padding-left: 20px;
+}
+
+h1 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #e0e0e0;
+}
+
+.bio {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    color: #f0f0f0;
+}
+
+.enjoy {
+    margin-top: 20px;
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+.section-group {
+    margin-bottom: 35px;
+}
+
+h3 {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    color: #fff;
+    font-weight: 700;
+}
+
+/* BUTTONS */
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 15px;
+}
+
+.gold-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg, #ffeebb 0%, #eacda3 100%);
+    color: #4b3621;
+    text-decoration: none;
+    padding: 10px 0;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+    transition: transform 0.2s;
+}
+
+.gold-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(180deg, #fff5d6 0%, #f3dcae 100%);
+}
+
+.pill-large {
+    width: 100px;
+}

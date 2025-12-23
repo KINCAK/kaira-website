@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaira Debut Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="privacy-overlay">
+        <div class="login-box">
+            <h2>Restricted Access</h2>
+            <p>Please enter the password to view this site.</p>
+            <input type="password" id="password-input" placeholder="Password">
+            <button onclick="checkPassword()">Enter</button>
+            <p id="error-msg" style="color: #ff6b6b; display: none; margin-top: 10px;">Wrong password.</p>
+        </div>
+    </div>
+
+    <div class="container" id="main-content">
+        
+        <div class="left-column">
+            <div class="cd-case">
+                <div class="plastic-sheen"></div>
+                <img src="cover.jpg" alt="Flower Cover Art" class="cover-art">
+                <div class="barcode">
+                    <div class="bars"></div>
+                    <span>123456-7890</span>
+                </div>
+            </div>
+            <p class="pre-order">AVAILABLE FOR<br>PRE-ORDER JULY 6</p>
+        </div>
+
+        <div class="right-column">
+            <header>
+                <h1>KAIRA<br>DEBUT WEBSITE</h1>
+            </header>
+
+            <div class="bio">
+                <p>I'm <strong>Kaira</strong>, I really like dabbling in tech space a lot. So far, I'll use this website to post my photographs from each country I've been to, and some of the side projects I'm currently on.</p>
+                <p class="enjoy">Enjoy.</p>
+            </div>
+
+            <div class="section-group">
+                <h3>Photos</h3>
+                <div class="button-grid">
+                    <a href="tr.html" class="gold-btn">For TR</a>
+                    <a href="nl.html" class="gold-btn">For NL</a>
+                    <a href="no.html" class="gold-btn">For NO</a>
+                    <a href="dk.html" class="gold-btn">For DK</a>
+                    <a href="se.html" class="gold-btn">For SE</a>
+                    <a href="fr.html" class="gold-btn">For FR</a>
+                </div>
+            </div>
+
+            <div class="section-group">
+                <h3>Projects</h3>
+                <a href="projects.html" class="gold-btn pill-large">Click</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
