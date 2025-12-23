@@ -69,23 +69,36 @@ function generateStars(id, count) {
 }
 generateStars('stars', 600); generateStars('stars2', 200); generateStars('stars3', 100);
 
-// --- 3. GALLERY & ANIMATION ---
+// --- 3. STABILIZED GALLERY LOGIC ---
 const targetValue = 149;
 const container = document.getElementById('gallery-container');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 
-for (let i = 1; i <= targetValue; i++) {
-    const div = document.createElement('div');
-    div.className = 'photo-item';
-    const img = document.createElement('img');
-    img.src = `Imgtr/${i}.jpg`;
-    img.loading = "lazy";
-    img.onerror = function() { this.parentElement.remove(); };
-    div.appendChild(img);
-    container.appendChild(div);
+// This function runs once to build the grid
+function initGallery() {
+    if (!container) return;
+    container.innerHTML = ''; // Clear container to stop infinite loading
+
+    for (let i = 1; i <= targetValue; i++) {
+        const div = document.createElement('div');
+        div.className = 'photo-item';
+        const img = document.createElement('img');
+        img.src = `Imgtr/${i}.jpg`; // Ensure path matches folder
+        img.loading = "lazy";
+        
+        // Remove item if image file is missing
+        img.onerror = function() { this.parentElement.remove(); };
+        
+        div.appendChild(img);
+        container.appendChild(div);
+    }
 }
 
+// Start the gallery
+initGallery();
+
+// --- 4. COUNTER & ANIMATIONS ---
 gsap.to("#count-up", {
     innerText: targetValue,
     duration: 2.5,
@@ -106,8 +119,12 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.1 });
 
-setTimeout(() => { document.querySelectorAll('.photo-item').forEach(item => observer.observe(item)); }, 300);
+// Reveal images on scroll
+setTimeout(() => { 
+    document.querySelectorAll('.photo-item').forEach(item => observer.observe(item)); 
+}, 300);
 
+// --- 5. LIGHTBOX INTERACTION ---
 container.addEventListener('click', (e) => {
     const clickedImg = e.target.closest('img');
     if (clickedImg) {
@@ -121,5 +138,8 @@ const closeLightbox = () => {
     lightbox.classList.remove('active');
     setTimeout(() => { lightbox.style.display = 'none'; }, 300);
 };
-lightbox.onclick = closeLightbox;
-document.addEventListener('keydown', (e) => { if (e.key === "Escape") closeLightbox(); });
+
+if (lightbox) {
+    lightbox.onclick = closeLightbox;
+    document.addEventListener('keydown', (e) => { if (e.key === "Escape") closeLightbox(); });
+}
