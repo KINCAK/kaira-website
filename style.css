@@ -1,19 +1,57 @@
-/* RESET AND BASE */
+/* REGISTER THE CUSTOM FONT */
+@font-face {
+    font-family: 'Aileron';
+    src: url('aileron.otf');
+}
+/* UPDATE: Body font */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+   
+}
+
+/*the Corner Title Style */
+.corner-title {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    font-family: 'Aileron', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #fde7cf;
+    z-index: 100;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* UPDATE: Right Column */
+.right-column {
+    flex: 1;
+    padding-left: 20px;
+    margin-top: 0;
+}
+/* BASE */
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    background: linear-gradient(135deg, #2b3036 0%, #3e3836 40%, #96541e 100%);
+    
+    /* NEW WALLPAPER SETTINGS */
+    background-image: url('mainpagelements/background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
     color: #fff;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* Prevent scrolling while locked */
+    overflow: hidden;
 }
 
 /* PRIVACY OVERLAY STYLES */
@@ -23,8 +61,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #151515; /* Dark background to hide site */
-    z-index: 9999; /* Ensures it sits on top */
+    background: #151515; 
+    z-index: 9999; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -142,7 +180,7 @@ body {
     font-size: 0.75rem;
     letter-spacing: 1.5px;
     font-weight: bold;
-    color: #ddd;
+    color: #fde7cf;
     text-transform: uppercase;
 }
 
@@ -165,7 +203,7 @@ h1 {
     font-size: 1.05rem;
     line-height: 1.6;
     margin-bottom: 40px;
-    color: #f0f0f0;
+    color: #fde7cf;
 }
 
 .enjoy {
@@ -181,7 +219,7 @@ h1 {
 h3 {
     font-size: 0.95rem;
     margin-bottom: 12px;
-    color: #fff;
+    color: #fde7cf;
     font-weight: 700;
 }
 
