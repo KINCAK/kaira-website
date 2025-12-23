@@ -40,7 +40,6 @@ body {
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     
-    /* NEW WALLPAPER SETTINGS */
     background-image: url('mainpagelements/background.png');
     background-size: cover;
     background-position: center;
@@ -50,11 +49,10 @@ body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    overflow: hidden;
+    overflow-x: hidden; 
 }
 
-/* PRIVACY OVERLAY STYLES */
+/* PRIVACY */
 #privacy-overlay {
     position: fixed;
     top: 0;
@@ -117,11 +115,18 @@ body {
 .container {
     display: flex;
     width: 90%;
-    max-width: 1100px;
-    gap: 60px;
-    align-items: center;
-    opacity: 0; /* Hidden */
+    max-width: 1400px;
+    gap: 80px;
+    align-items: flex-start;
+    
+    /* NEW: Push the whole group down to the "Rule of Thirds" line */
+    margin-top: 18vh;  /* Try 15vh, 18vh, or 20vh to see what you like best */
+    margin-bottom: 50px; /* Some breathing room at the bottom */
+    
+    opacity: 0; 
     transition: opacity 1s ease;
+    position: relative; /* Required for z-index to work */
+    z-index: 10;        /* Places this container ON TOP of the effects (which are z-index: 1) */
 }
 
 /* LEFT COLUMN - CD CASE */
@@ -132,44 +137,24 @@ body {
     align-items: center;
 }
 
-.cd-case {
-    position: relative;
+/* --- SIMPLE CD IMAGE STYLES --- */
+
+.cd-container {
     width: 100%;
-    max-width: 450px;
-    aspect-ratio: 1 / 1;
-    background: rgba(255,255,255,0.1);
-    border: 2px solid rgba(255,255,255,0.3);
-    border-left: 12px solid rgba(255,255,255,0.4);
-    box-shadow: 15px 15px 40px rgba(0,0,0,0.6);
-    padding: 10px;
+    max-width: 650px; 
+    margin-bottom: 30px; 
 }
 
-.cover-art {
+.cd-image {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
     display: block;
+    filter: drop-shadow(10px 10px 20px rgba(0,0,0,0.5)); 
+    transition: transform 0.3s ease;
 }
 
-.plastic-sheen {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 60%);
-    pointer-events: none;
-    z-index: 2;
-}
-
-.barcode {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    background: #fff;
-    padding: 4px 8px;
-    color: #000;
-    font-size: 10px;
-    font-family: monospace;
-    transform: rotate(-2deg);
-    opacity: 0.9;
+.cd-image:hover {
+    transform: scale(1.02); 
 }
 
 .pre-order {
@@ -188,6 +173,7 @@ body {
 .right-column {
     flex: 1;
     padding-left: 20px;
+    padding-top: 20px; /* Adds a little buffer at the top */
 }
 
 h1 {
@@ -252,4 +238,98 @@ h3 {
 
 .pill-large {
     width: 100px;
+}
+
+/* --- INTERACTIVE BACKGROUND EFFECTS --- */
+
+/* This container sits ON TOP of your wallpaper but BEHIND your text */
+.effects-container {
+    position: fixed; /* Stays in place when scrolling */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Lets clicks pass through to buttons */
+    z-index: 1; /* Low z-index so it's behind the CD case */
+    overflow: hidden;
+}
+
+/* Floating Spheres */
+.gradient-sphere {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px); /* Softens the blobs */
+    opacity: 0.6; /* Semi-transparent so wallpaper shows */
+    /* mix-blend-mode: overlay; Makes colors blend with your wallpaper */
+}
+
+.sphere-1 {
+    width: 50vw;
+    height: 50vw;
+    background: linear-gradient(40deg, rgba(255, 0, 128, 0.8), rgba(255, 102, 0, 0.4));
+    top: -10%;
+    left: -10%;
+    animation: float-1 20s ease-in-out infinite alternate;
+}
+
+.sphere-2 {
+    width: 40vw;
+    height: 40vw;
+    background: linear-gradient(240deg, rgba(72, 0, 255, 0.8), rgba(0, 183, 255, 0.4));
+    bottom: -10%;
+    right: -10%;
+    animation: float-2 25s ease-in-out infinite alternate;
+}
+
+.sphere-3 {
+    width: 30vw;
+    height: 30vw;
+    background: linear-gradient(120deg, rgba(133, 89, 255, 0.5), rgba(98, 216, 249, 0.3));
+    top: 40%;
+    left: 30%;
+    animation: float-3 22s ease-in-out infinite alternate;
+}
+
+/* Animations for floating */
+@keyframes float-1 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(10%, 10%) scale(1.1); }
+}
+@keyframes float-2 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-10%, -5%) scale(1.15); }
+}
+@keyframes float-3 {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+    100% { transform: translate(-5%, 10%) scale(1.05); opacity: 0.7; }
+}
+
+/* Noise Overlay (Optional - adds film grain texture) */
+.noise-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0.07;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* MOUSE PARTICLES (The Trail Effect) */
+.particles-container {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 2;
+}
+
+.particle {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%); /* Centers particle on mouse */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    animation: fadeOut 1s forwards; /* Disappear after 1 second */
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
 }

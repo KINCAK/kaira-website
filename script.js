@@ -43,3 +43,30 @@ document.getElementById("password-input").addEventListener("keypress", function(
         checkPassword();
     }
 });
+
+/* --- MOUSE TRAIL EFFECT --- */
+document.addEventListener('mousemove', function(e) {
+    const container = document.getElementById('particles-container');
+    
+    // Create a new particle element
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    
+    // Set position to mouse coordinates
+    particle.style.left = e.clientX + 'px';
+    particle.style.top = e.clientY + 'px';
+    
+    // Randomize size slightly for variety
+    const size = Math.random() * 5 + 2; // Size between 2px and 7px
+    particle.style.width = size + 'px';
+    particle.style.height = size + 'px';
+    
+    // Add to screen
+    container.appendChild(particle);
+    
+    // Remove the particle from DOM after animation finishes (1 second)
+    // This prevents the browser from getting slow
+    setTimeout(() => {
+        particle.remove();
+    }, 1000);
+});
