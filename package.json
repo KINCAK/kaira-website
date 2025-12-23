@@ -4,8 +4,8 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "start": "lite-server",
-    "deploy": "gh-pages -d ."
+  "start": "lite-server",
+  "deploy": "gh-pages -d . -m \"Auto-deploy update\""
   },
   "repository": {
     "type": "git",
