@@ -1,72 +1,138 @@
 function checkPassword() {
-    // 1. Get what the user typed
     const passwordInput = document.getElementById('password-input').value;
-    
-    // 2. Define your password here
     const secretCode = "vita"; 
 
-    // 3. Get the HTML elements we need to show/hide
     const overlay = document.getElementById('privacy-overlay');
     const content = document.getElementById('main-content');
     const errorMsg = document.getElementById('error-msg');
 
-    // 4. Check if the password matches
     if (passwordInput === secretCode) {
-        // Correct Password:
-        
-        // Hide the error message if it was showing
         errorMsg.style.display = "none";
-
-        // Fade out the black overlay
         overlay.style.opacity = "0";
 
-        // Wait 0.5 seconds for fade to finish, then remove overlay completely
         setTimeout(() => {
             overlay.style.display = "none";
-            
-            // Show the main website content
             content.style.opacity = "1";
-            
-            // Re-enable scrolling on the body
             document.body.style.overflow = "auto";
+            
+            // Only run animation if the library loaded correctly
+            if (window.Motion) {
+                initBlurBio();
+            }
+            setTimeout(initEnjoyAnimation, 1000);
         }, 500);
-
     } else {
-        // Wrong Password: Show error message
         errorMsg.style.display = "block";
     }
 }
 
-// Optional: Allow pressing "Enter" key to submit
-document.getElementById("password-input").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        checkPassword();
+function initBlurBio() {
+    // We grab 'animate' directly from window.Motion here
+    const { animate } = window.Motion;
+    const container = document.getElementById('blur-bio-text');
+    if (!container) return;
+
+    const rawText = container.innerText;
+    container.innerHTML = '';
+    const words = rawText.split(' ');
+    
+    words.forEach((word, index) => {
+        const span = document.createElement('span');
+        span.textContent = word;
+        span.className = 'blur-word';
+        container.appendChild(span);
+
+        if (index < words.length - 1) {
+            container.appendChild(document.createTextNode('\u00A0'));
+        }
+
+        animate(
+            span,
+            { 
+                opacity: [0, 1], 
+                filter: ['blur(10px)', 'blur(0px)'],
+                y: [-30, 0] 
+            },
+            { 
+                duration: 0.8, 
+                delay: index * 0.06, 
+                easing: [0.17, 0.67, 0.83, 0.67] 
+            }
+        );
+    });
+}
+
+// Ensure event listeners are added after the page loads
+document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById("password-input");
+    if (input) {
+        input.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        });
     }
+
+    // --- TRAIL EFFECT (Completed) ---
+    document.addEventListener('mousemove', function(e) {
+        const container = document.getElementById('particles-container');
+        if(!container) return;
+        
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        particle.style.left = e.clientX + 'px';
+        particle.style.top = e.clientY + 'px';
+        
+        const size = Math.random() * 5 + 2; 
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        
+        container.appendChild(particle);
+        
+        setTimeout(() => {
+            particle.remove();
+        }, 1000);
+    });
 });
 
-/* --- MOUSE TRAIL EFFECT --- */
-document.addEventListener('mousemove', function(e) {
-    const container = document.getElementById('particles-container');
+function initEnjoyAnimation() {
+    const enjoyText = document.getElementById('animate-enjoy');
+    if (!enjoyText) return;
+
+  
+    const text = enjoyText.innerText;
+    enjoyText.innerHTML = '';
     
-    // Create a new particle element
-    const particle = document.createElement('div');
-    particle.classList.add('particle');
-    
-    // Set position to mouse coordinates
-    particle.style.left = e.clientX + 'px';
-    particle.style.top = e.clientY + 'px';
-    
-    // Randomize size slightly for variety
-    const size = Math.random() * 5 + 2; // Size between 2px and 7px
-    particle.style.width = size + 'px';
-    particle.style.height = size + 'px';
-    
-    // Add to screen
-    container.appendChild(particle);
-    
-    // Remove the particle from DOM after animation finishes (1 second)
-    // This prevents the browser from getting slow
-    setTimeout(() => {
-        particle.remove();
-    }, 1000);
-});
+    const chars = text.split('').map(char => {
+        const span = document.createElement('span');
+        span.innerText = char === ' ' ? '\u00A0' : char;
+        span.style.display = 'inline-block';
+        span.style.willChange = 'transform, opacity';
+        enjoyText.appendChild(span);
+        return span;
+    });
+
+   
+    gsap.fromTo(chars, 
+        { 
+            opacity: 0, 
+            y: 40 
+        }, 
+        {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power3.out",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: enjoyText,
+                start: "top 90%", 
+                once: true
+            },
+            onComplete: () => {
+                console.log('All letters have animated!');
+            }
+        }
+    );
+}

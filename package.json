@@ -4,8 +4,8 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-  "start": "lite-server",
-  "deploy": "gh-pages -d . -m \"Auto-deploy update\""
+    "start": "lite-server",
+    "deploy": "gh-pages -d . -m \"Auto-deploy update\""
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,10 @@
   "devDependencies": {
     "gh-pages": "^6.3.0",
     "lite-server": "^2.6.1"
+  },
+  "dependencies": {
+    "@gsap/react": "^2.1.2",
+    "gsap": "^3.14.2",
+    "motion": "^12.23.26"
   }
 }

@@ -1,15 +1,15 @@
-/* REGISTER THE CUSTOM FONT */
+/* REGISTER  */
 @font-face {
     font-family: 'Aileron';
     src: url('aileron.otf');
 }
-/* UPDATE: Body font */
+/* Body font */
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
    
 }
 
-/*the Corner Title Style */
+
 .corner-title {
     position: absolute;
     top: 40px;
@@ -111,7 +111,7 @@ body {
     opacity: 0.9;
 }
 
-/* MAIN CONTENT HIDDEN INITIALLY */
+/* MAIN CONTENT */
 .container {
     display: flex;
     width: 90%;
@@ -119,17 +119,16 @@ body {
     gap: 80px;
     align-items: flex-start;
     
-    /* NEW: Push the whole group down to the "Rule of Thirds" line */
-    margin-top: 18vh;  /* Try 15vh, 18vh, or 20vh to see what you like best */
-    margin-bottom: 50px; /* Some breathing room at the bottom */
+    margin-top: 18vh;  
+    margin-bottom: 50px; 
     
     opacity: 0; 
     transition: opacity 1s ease;
-    position: relative; /* Required for z-index to work */
-    z-index: 10;        /* Places this container ON TOP of the effects (which are z-index: 1) */
+    position: relative; 
+    z-index: 10;       
 }
 
-/* LEFT COLUMN - CD CASE */
+
 .left-column {
     flex: 1;
     display: flex;
@@ -137,7 +136,7 @@ body {
     align-items: center;
 }
 
-/* --- SIMPLE CD IMAGE STYLES --- */
+/* --- CDS --- */
 
 .cd-container {
     width: 100%;
@@ -173,7 +172,7 @@ body {
 .right-column {
     flex: 1;
     padding-left: 20px;
-    padding-top: 20px; /* Adds a little buffer at the top */
+    padding-top: 20px; 
 }
 
 h1 {
@@ -242,25 +241,23 @@ h3 {
 
 /* --- INTERACTIVE BACKGROUND EFFECTS --- */
 
-/* This container sits ON TOP of your wallpaper but BEHIND your text */
 .effects-container {
     position: fixed; /* Stays in place when scrolling */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Lets clicks pass through to buttons */
-    z-index: 1; /* Low z-index so it's behind the CD case */
+    pointer-events: none; 
+    z-index: 1; 
     overflow: hidden;
 }
 
-/* Floating Spheres */
 .gradient-sphere {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px); /* Softens the blobs */
-    opacity: 0.6; /* Semi-transparent so wallpaper shows */
-    /* mix-blend-mode: overlay; Makes colors blend with your wallpaper */
+    filter: blur(80px); 
+    opacity: 0.6; 
+   
 }
 
 .sphere-1 {
@@ -290,7 +287,6 @@ h3 {
     animation: float-3 22s ease-in-out infinite alternate;
 }
 
-/* Animations for floating */
 @keyframes float-1 {
     0% { transform: translate(0, 0) scale(1); }
     100% { transform: translate(10%, 10%) scale(1.1); }
@@ -304,7 +300,6 @@ h3 {
     100% { transform: translate(-5%, 10%) scale(1.05); opacity: 0.7; }
 }
 
-/* Noise Overlay (Optional - adds film grain texture) */
 .noise-overlay {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -312,7 +307,6 @@ h3 {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* MOUSE PARTICLES (The Trail Effect) */
 .particles-container {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -324,12 +318,30 @@ h3 {
     background: white;
     border-radius: 50%;
     pointer-events: none;
-    transform: translate(-50%, -50%); /* Centers particle on mouse */
+    transform: translate(-50%, -50%); 
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    animation: fadeOut 1s forwards; /* Disappear after 1 second */
+    animation: fadeOut 1s forwards; 
 }
 
 @keyframes fadeOut {
     0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
     100% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
 }
+
+
+
+.blur-text-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1.05rem; 
+    line-height: 1.6;
+    color: #fde7cf;     
+}
+
+.blur-word {
+    display: inline-block;
+    will-change: transform, filter, opacity;
+   
+}
+
+/*Subway cloudberry keyboard toaster elevator humidity brick paperclip mountain logic sandwich clockwork suspension. Static nebula keyboard rectangle symphony tofu equilibrium mustache folder avocado pajamas resonance spatula microwave catastrophe. Velvet bicycle translucent gravity puddle folder avocado logic sandwich*/

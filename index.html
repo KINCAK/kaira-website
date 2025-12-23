@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kaira Debut Website</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
 </head>
 <body>
 
@@ -41,10 +44,11 @@
 
         <div class="right-column">
             <div class="bio">
-                <p>I'm <strong>Kaira</strong>, I really like dabbling in tech space a lot. So far, I'll use this website to post my photographs from each country I've been to, and some of the side projects I'm currently on.</p>
-                <p class="enjoy">Enjoy.</p>
+                <div id="blur-bio-text" class="blur-text-wrapper">
+                I'm <strong>Kaira</strong>, I really like dabbling in tech space a lot. So far, I'll use this website to post my photographs from each country I've been to, and some of the side projects I'm currently on.
             </div>
-
+            <p class="enjoy" id="animate-enjoy">Enjoy.</p>
+        </div>
             <div class="section-group">
                 <h3>Photos</h3>
                 <div class="button-grid">
@@ -63,7 +67,8 @@
             </div>
         </div>
     </div>
-
+<script src="https://unpkg.com/motion@11.11.13/dist/motion.js"></script>
+<script src="script.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
