@@ -68,37 +68,72 @@ function generateStars(id, count) {
     document.head.appendChild(style);
 }
 generateStars('stars', 600); generateStars('stars2', 200); generateStars('stars3', 100);
-
-// --- 3. STABILIZED GALLERY LOGIC ---
+// --- 3. OPTIMIZED GALLERY LOGIC (LAZY LOADING) ---
 const targetValue = 149;
 const container = document.getElementById('gallery-container');
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
 
-// This function runs once to build the grid
 function initGallery() {
     if (!container) return;
-    container.innerHTML = ''; // Clear container to stop infinite loading
+    container.innerHTML = ''; 
 
     for (let i = 1; i <= targetValue; i++) {
         const div = document.createElement('div');
         div.className = 'photo-item';
-        const img = document.createElement('img');
-        img.src = `Imgtr/${i}.jpg`; // Ensure path matches folder
-        img.loading = "lazy";
         
-        // Remove item if image file is missing
+        const img = document.createElement('img');
+        // 'src' yerine 'data-src' kullanarak yüklemeyi engelliyoruz
+        img.dataset.src = `Imgtr/${i}.jpg`; 
+        img.alt = `Turkey Memory ${i}`;
+        img.className = "lazy-img";
+        
+        // Resim bulunamazsa kutuyu kaldır
         img.onerror = function() { this.parentElement.remove(); };
         
         div.appendChild(img);
         container.appendChild(div);
     }
+    
+    // Resimler DOM'a eklendikten sonra gözlemleyiciyi başlat
+    startLazyLoading();
 }
 
-// Start the gallery
+// --- 4. SCROLL OBSERVER & ANIMATIONS ---
+function startLazyLoading() {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target.querySelector('img');
+                const container = entry.target;
+
+                if (img && img.dataset.src) {
+                    // Gerçek resmi şimdi yüklüyoruz
+                    img.src = img.dataset.src;
+                    
+                    // Resim tamamen yüklendiğinde görünür yap (Görsel şölen için)
+                    img.onload = () => {
+                        container.classList.add('visible');
+                    };
+                    
+                    // Gözlemlemeyi bırak (Performans için)
+                    observer.unobserve(container);
+                }
+            }
+        });
+    }, {
+        // Resim ekrana girmeden 200px önce yüklemeye başla (Kullanıcı beklemesin)
+        rootMargin: '0px 0px 200px 0px',
+        threshold: 0.01
+    });
+
+    document.querySelectorAll('.photo-item').forEach(item => {
+        imageObserver.observe(item);
+    });
+}
+
+// Galeriyi başlat
 initGallery();
 
-// --- 4. COUNTER & ANIMATIONS ---
+// Sayaç Animasyonu (GSAP)
 gsap.to("#count-up", {
     innerText: targetValue,
     duration: 2.5,
@@ -110,16 +145,6 @@ gsap.to("#count-up", {
     }
 });
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.1 });
-
-// Reveal images on scroll
 setTimeout(() => { 
     document.querySelectorAll('.photo-item').forEach(item => observer.observe(item)); 
 }, 300);
